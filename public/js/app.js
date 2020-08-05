@@ -70115,7 +70115,7 @@ var Login = /*#__PURE__*/function (_Component) {
       };
       Object(_UserFunctions__WEBPACK_IMPORTED_MODULE_1__["login"])(user).then(function (res) {
         if (res) {
-          _this2.props.history.push('/profile');
+          _this2.props.history.push("/profile");
         }
       });
     }
@@ -70206,8 +70206,8 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
-var Navbar = /*#__PURE__*/function (_React$Component) {
-  _inherits(Navbar, _React$Component);
+var Navbar = /*#__PURE__*/function (_Component) {
+  _inherits(Navbar, _Component);
 
   var _super = _createSuper(Navbar);
 
@@ -70221,7 +70221,7 @@ var Navbar = /*#__PURE__*/function (_React$Component) {
     key: "logOut",
     value: function logOut(e) {
       e.preventDefault();
-      localStorage.removeItem('userToken');
+      localStorage.removeItem('usertoken');
       this.props.history.push('/');
     }
   }, {
@@ -70250,7 +70250,7 @@ var Navbar = /*#__PURE__*/function (_React$Component) {
       }, "Profile")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
         className: "nav-item"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        href: "",
+        href: "/",
         onClick: this.logOut.bind(this),
         className: "nav-link"
       }, "Logout")));
@@ -70281,7 +70281,7 @@ var Navbar = /*#__PURE__*/function (_React$Component) {
   }]);
 
   return Navbar;
-}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["withRouter"])(Navbar));
 
@@ -70349,8 +70349,8 @@ var Profile = /*#__PURE__*/function (_React$Component) {
 
       Object(_UserFunctions__WEBPACK_IMPORTED_MODULE_1__["getProfile"])().then(function (res) {
         _this2.setState({
-          name: res.name,
-          email: res.email
+          name: res.user.name,
+          email: res.user.email
         });
       });
     }
@@ -70555,16 +70555,17 @@ var login = function login(user) {
   }).then(function (res) {
     localStorage.setItem('usertoken', res.data.token);
     console.log(res);
-  })["catch"](function (res) {});
+  })["catch"](function (err) {
+    console.log(err);
+  });
 };
 var getProfile = function getProfile() {
-  return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/auth/profile', {
+  return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/auth/profile', {
     headers: {
       Authorization: "Bearer ".concat(localStorage.usertoken)
     }
   }).then(function (res) {
     console.log(res);
-    console.log(res.data);
     return res.data;
   })["catch"](function (res) {});
 };

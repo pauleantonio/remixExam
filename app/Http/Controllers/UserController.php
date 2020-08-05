@@ -69,8 +69,17 @@ class UserController extends Controller
         catch(Tymon\JWTAuth\Exceptions\TokenExpiredException $e){
             return response()->json(['token_absent'],$e->getStatusCode());
         }
+        error_log($user);
         return response()->json(compact('user'));
     }
+
+    public function logout()
+    {
+        auth()->logout();
+
+        return response()->json(['message' => 'Successfully logged out']);
+    }
+
     
   
   

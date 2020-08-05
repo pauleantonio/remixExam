@@ -7,6 +7,7 @@ class Landing extends React.Component{
             <div className="container">
                 <div className="jumbotron">
                     <div className="col-sm-8 mx-auto">Sample</div>
+         
                 </div>
             </div>
 

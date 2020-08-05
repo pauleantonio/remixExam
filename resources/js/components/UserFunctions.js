@@ -25,20 +25,19 @@ export const login = user=>{
     .then(res=>{
         localStorage.setItem('usertoken',res.data.token);
         console.log(res)
-    }).catch(res=>{
-
+    }).catch(err=>{
+        console.log(err)
     })
 
 }
 
-export const getProfile = ()=>{
+export const getProfile =()=>{
     return axios
-    .post('/api/auth/profile',{
+    .get('/api/auth/profile',{
         headers:{Authorization:`Bearer ${localStorage.usertoken}`}
     })
     .then(res=>{
         console.log(res)
-        console.log(res.data)
         return res.data
     }).catch(res=>{
        

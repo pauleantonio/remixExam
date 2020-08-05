@@ -1,10 +1,10 @@
 import React, {Component} from 'react'
 import {Link,withRouter} from 'react-router-dom'
 
-class Navbar extends React.Component {
+class Navbar extends Component {
     logOut(e){
         e.preventDefault()
-        localStorage.removeItem('userToken')
+        localStorage.removeItem('usertoken')
         this.props.history.push('/')
     }
 
@@ -36,7 +36,7 @@ class Navbar extends React.Component {
             </li>
 
             <li className="nav-item">
-                <a href="" onClick={this.logOut.bind(this)} className="nav-link">
+                <a href="/" onClick={this.logOut.bind(this)} className="nav-link">
                     Logout
                 </a>
             </li>

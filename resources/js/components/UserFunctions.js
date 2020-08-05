@@ -7,7 +7,7 @@ export const register = newUser=>{
         headers:{'Content-Type':'application/json'}
     })
     .then(res=>{
-        console.log(res)
+      
         return res.data;
     }).catch(err=>{
         console.log(err)
@@ -25,6 +25,7 @@ export const login = user=>{
     })
     .then(res=>{
         localStorage.setItem('usertoken',res.data.token);
+       
         return res.data.token;
     }).catch(err=>{
         console.log(err)
@@ -38,7 +39,7 @@ export const getProfile =()=>{
         headers:{Authorization:`Bearer ${localStorage.usertoken}`}
     })
     .then(res=>{
-        console.log(res)
+      
         return res.data
     }).catch(res=>{
        

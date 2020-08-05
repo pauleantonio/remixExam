@@ -1,14 +1,19 @@
 import React, {Component} from 'react'
 import {Link,withRouter} from 'react-router-dom'
-
+import {getProfile} from './UserFunctions'
 class Navbar extends Component {
     logOut(e){
         e.preventDefault()
         localStorage.removeItem('usertoken')
         this.props.history.push('/')
     }
-
+    
+  
     render(){
+       
+    
+
+
         const guestLink=(
             <ul className="navbar-nav">
             <li className="nav-item">
@@ -34,12 +39,31 @@ class Navbar extends Component {
                     Profile
                 </Link>
             </li>
+            <li className="nav-item">
+                        <Link to="/crud" className="nav-link">
+                            CRUD
+                        </Link>
+           </li>
 
             <li className="nav-item">
                 <a href="/" onClick={this.logOut.bind(this)} className="nav-link">
                     Logout
                 </a>
             </li>
+         
+        
+
+            </ul>
+
+        )
+
+        const adminLink=(
+            <ul className="navbar-nav">
+                <li className="nav-item">
+                        <Link to="/crud" className="nav-link">
+                            USERS
+                        </Link>
+                    </li>
 
             </ul>
 
@@ -66,6 +90,7 @@ class Navbar extends Component {
 
                     </ul>
                     {localStorage.usertoken?userLink:guestLink}
+
                  </div>
             </nav>
 

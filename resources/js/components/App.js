@@ -7,6 +7,8 @@ import Landing from './Landing'
 import Login from './Login'
 import Register from './Register'
 import Profile from './Profile'
+import Crud from './Crud'
+
 
 class App extends Component {
     render(){
@@ -19,6 +21,7 @@ class App extends Component {
                     <Route exact path="/register" component={Register}/>
                     <Route exact path="/login" component={Login}/>
                     <Route exact path="/profile" component={Profile}/>
+                    <Route exact path="/crud" component={Crud}/>
                 </div>
                 </div>
 

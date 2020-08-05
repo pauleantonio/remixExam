@@ -6,6 +6,7 @@ class Login extends Component{
         super()
         this.state={
             email:'',
+            role:'',
             password:'',
             errors:{}
 
@@ -26,7 +27,7 @@ class Login extends Component{
         }
 
           login(user).then( res=>{
-   
+        
             if(res){
                 this.props.history.push("/profile")
             }

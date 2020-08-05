@@ -7,7 +7,8 @@ class Profile extends React.Component{
         super()
         this.state={
             name:'',
-            email:''
+            email:'',
+            role:''
             
         }
     }
@@ -16,8 +17,10 @@ class Profile extends React.Component{
         getProfile().then(res=>{
             this.setState({
                 name:res.user.name,
+                role:res.user.role_id,
                 email:res.user.email
             })
+            console.log(res.user)
         })
     }
     render(){
@@ -38,6 +41,11 @@ class Profile extends React.Component{
                 <tr>
                     <td>Email</td>
                     <td>{this.state.email}</td>
+                </tr>
+
+                <tr>
+                    <td>Role</td>
+                    <td>{this.state.role}</td>
                 </tr>
 
                 </tbody>

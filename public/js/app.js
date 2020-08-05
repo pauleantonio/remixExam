@@ -69945,21 +69945,7 @@ var App = /*#__PURE__*/function (_Component) {
   }]);
 
   return App;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]); // function App() {
-//     return (
-//         <div className="container">
-//             <div className="row justify-content-center">
-//                 <div className="col-md-8">
-//                     <div className="card">
-//                         <div className="card-header">Example Component </div>
-//                         <div className="card-body">I'm an example component!</div>
-//                     </div>
-//                 </div>
-//             </div>
-//         </div>
-//     );
-// }
-
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 /* harmony default export */ __webpack_exports__["default"] = (App);
 
@@ -70542,7 +70528,10 @@ var register = function register(newUser) {
     }
   }).then(function (res) {
     console.log(res);
-  })["catch"](function (res) {});
+    return res.data;
+  })["catch"](function (err) {
+    console.log(err);
+  });
 };
 var login = function login(user) {
   return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/auth/login', {
@@ -70554,7 +70543,7 @@ var login = function login(user) {
     }
   }).then(function (res) {
     localStorage.setItem('usertoken', res.data.token);
-    console.log(res);
+    return res.data.token;
   })["catch"](function (err) {
     console.log(err);
   });

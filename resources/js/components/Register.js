@@ -28,9 +28,11 @@ class Register extends React.Component{
         }
 
         register(user).then(res=>{
-            if(res){
-                this.props.history.push('/login')
-            }
+                if(res){
+                    this.props.history.push('/login')
+                }
+              
+            
         })
     }
     render(){

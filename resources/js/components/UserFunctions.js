@@ -8,8 +8,9 @@ export const register = newUser=>{
     })
     .then(res=>{
         console.log(res)
-    }).catch(res=>{
-    
+        return res.data;
+    }).catch(err=>{
+        console.log(err)
     })
 
 }
@@ -24,7 +25,7 @@ export const login = user=>{
     })
     .then(res=>{
         localStorage.setItem('usertoken',res.data.token);
-        console.log(res)
+        return res.data.token;
     }).catch(err=>{
         console.log(err)
     })

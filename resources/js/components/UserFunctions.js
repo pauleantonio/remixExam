@@ -33,6 +33,20 @@ export const login = user=>{
 
 }
 
+export const getJoke = ()=>{
+    return axios
+    .get('https://sv443.net/jokeapi/v2/joke/Any',{
+        headers:{'Content-Type':'application/json'}
+    })
+    .then(res=>{
+      
+        return res.data
+    }).catch(res=>{
+       
+    })
+
+}
+
 export const getProfile =()=>{
     return axios
     .get('/api/auth/profile',{

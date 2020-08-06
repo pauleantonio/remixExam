@@ -69946,6 +69946,10 @@ var App = /*#__PURE__*/function (_Component) {
         exact: true,
         path: "/crud",
         component: _Crud__WEBPACK_IMPORTED_MODULE_8__["default"]
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+        exact: true,
+        path: "/create",
+        component: _Crud__WEBPACK_IMPORTED_MODULE_8__["default"]
       }))));
     }
   }]);
@@ -70001,22 +70005,128 @@ var Crud = /*#__PURE__*/function (_React$Component) {
 
   var _super = _createSuper(Crud);
 
-  function Crud() {
+  function Crud(props) {
+    var _this;
+
     _classCallCheck(this, Crud);
 
-    return _super.apply(this, arguments);
+    _this = _super.call(this, props);
+    _this.state = {
+      id: 0,
+      name: '',
+      monsters: [],
+      monster: ''
+    };
+    return _this;
   }
 
   _createClass(Crud, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.getMonster();
+      this.getOne(1);
+    }
+  }, {
+    key: "getMonster",
+    value: function getMonster() {
+      var _this2 = this;
+
+      return axios.get('/api/monster', {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }).then(function (res) {
+        _this2.setState({
+          monsters: res.data
+        });
+      })["catch"](function (res) {});
+    }
+  }, {
+    key: "getOne",
+    value: function getOne(e) {
+      var _this3 = this;
+
+      return axios.get("api/monster/item/" + e, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }).then(function (res) {
+        _this3.setState({
+          monster: res.data
+        });
+
+        console.log(_this3.state.monster);
+      })["catch"](function (res) {});
+    }
+  }, {
+    key: "create",
+    value: function create() {
+      return axios.get("api/monster/item/", {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }).then(function (res) {
+        console.log("created");
+      })["catch"](function (res) {});
+    }
+  }, {
+    key: "update",
+    value: function update(e) {
+      return axios.get("api/monster/update/" + e, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }).then(function (res) {
+        console.log("updated");
+      })["catch"](function (res) {});
+    }
+  }, {
+    key: "delete",
+    value: function _delete(e) {
+      return axios.get("api/monster/delete/" + e, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }).then(function (res) {
+        console.log("deleted");
+      })["catch"](function (res) {});
+    }
+  }, {
     key: "render",
     value: function render() {
+      var _this4 = this;
+
+      var posts = function posts() {
+        if (!_this4.state.monsters) {
+          return loading;
+        }
+
+        if (_this4.state.monsters.length == 0) {
+          return noitem;
+        } else {
+          return item;
+        }
+      };
+
+      var loading = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Monster Name"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "LOADING"));
+      var noitem = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Monster Name"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "No Monsters"));
+      var item = this.state.monsters.map(function (mons) {
+        /*#__PURE__*/
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, _this4.state.monsters.length), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          className: "btn btn-primary mr-4"
+        }, "Add"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          className: "btn btn-secondary mr-4"
+        }, "Edit"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          className: "btn btn-danger mr-4"
+        }, "Delete")));
+      });
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "jumbotron"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-sm-8 mx-auto"
-      }, "Crud")));
+        className: "row"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
+        className: "table"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Monster Name"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Commands"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, posts()))));
     }
   }]);
 
@@ -70038,8 +70148,7 @@ var Crud = /*#__PURE__*/function (_React$Component) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _UserFunctions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./UserFunctions */ "./resources/js/components/UserFunctions.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -70071,12 +70180,31 @@ var Landing = /*#__PURE__*/function (_React$Component) {
   var _super = _createSuper(Landing);
 
   function Landing() {
+    var _this;
+
     _classCallCheck(this, Landing);
 
-    return _super.apply(this, arguments);
+    _this = _super.call(this);
+    _this.state = {
+      joke: '',
+      delivery: ''
+    };
+    return _this;
   }
 
   _createClass(Landing, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      Object(_UserFunctions__WEBPACK_IMPORTED_MODULE_1__["getJoke"])().then(function (res) {
+        _this2.setState({
+          joke: res.setup,
+          delivery: res.delivery
+        });
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -70084,8 +70212,8 @@ var Landing = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "jumbotron"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-sm-8 mx-auto"
-      }, "Sample")));
+        className: "col-sm-8 mx-auto "
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.state.joke), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.state.delivery))));
     }
   }]);
 
@@ -70428,8 +70556,6 @@ var Profile = /*#__PURE__*/function (_React$Component) {
           role: res.user.role_id,
           email: res.user.email
         });
-
-        console.log(res.user);
       });
     }
   }, {
@@ -70584,10 +70710,10 @@ var Register = /*#__PURE__*/function (_React$Component) {
         placeholder: "Enter password here",
         value: this.state.password,
         onChange: this.onChange
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         type: "submit",
-        value: "Submit"
-      })))));
+        className: "btn btn-primary"
+      }, "Submit")))));
     }
   }]);
 
@@ -70602,13 +70728,14 @@ var Register = /*#__PURE__*/function (_React$Component) {
 /*!**************************************************!*\
   !*** ./resources/js/components/UserFunctions.js ***!
   \**************************************************/
-/*! exports provided: register, login, getProfile */
+/*! exports provided: register, login, getJoke, getProfile */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "register", function() { return register; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "login", function() { return login; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getJoke", function() { return getJoke; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getProfile", function() { return getProfile; });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
@@ -70638,6 +70765,15 @@ var login = function login(user) {
   })["catch"](function (err) {
     console.log(err);
   });
+};
+var getJoke = function getJoke() {
+  return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('https://sv443.net/jokeapi/v2/joke/Any', {
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }).then(function (res) {
+    return res.data;
+  })["catch"](function (res) {});
 };
 var getProfile = function getProfile() {
   return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/auth/profile', {

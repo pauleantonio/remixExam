@@ -20,7 +20,7 @@ class Profile extends React.Component{
                 role:res.user.role_id,
                 email:res.user.email
             })
-            console.log(res.user)
+
         })
     }
     render(){

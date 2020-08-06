@@ -20,7 +20,6 @@ class Register extends React.Component{
 
     onSubmit(e){
         e.preventDefault()
-
         const user={
             name:this.state.name,
             email:this.state.email,
@@ -30,9 +29,7 @@ class Register extends React.Component{
         register(user).then(res=>{
                 if(res){
                     this.props.history.push('/login')
-                }
-              
-            
+                } 
         })
     }
     render(){
@@ -73,7 +70,8 @@ class Register extends React.Component{
                     value={this.state.password}
                     onChange={this.onChange}></input>
                     </div>
-                <input type="submit" value="Submit"/>
+                    <button type="submit" className="btn btn-primary" >Submit</button>
+
                 </form>
                   
                   

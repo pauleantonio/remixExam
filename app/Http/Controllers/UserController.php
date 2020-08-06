@@ -32,7 +32,7 @@ class UserController extends Controller
             'password'=>Hash::make($request->json()->get('password'))
         ]);
         $token =JWTAuth::fromUser($user);
-
+            
         return response()->json(compact('user','token'),201);
     }
  
@@ -73,13 +73,7 @@ class UserController extends Controller
         return response()->json(compact('user'));
     }
 
-    public function logout()
-    {
-        auth()->logout();
-
-        return response()->json(['message' => 'Successfully logged out']);
-    }
-
+  
     
   
   

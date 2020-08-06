@@ -6,12 +6,17 @@ class Navbar extends Component {
         e.preventDefault()
         localStorage.removeItem('usertoken')
         this.props.history.push('/')
+        
     }
+
+  
     
   
     render(){
        
-    
+        
+     
+     
 
 
         const guestLink=(

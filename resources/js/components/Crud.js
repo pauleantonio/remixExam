@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-
+import {Link} from 'react-router-dom'
 
 class Crud extends React.Component{
 
@@ -11,6 +11,7 @@ class Crud extends React.Component{
             monsters:[],
             monster:''
         }
+        this.delete=this.delete.bind(this)
     }
 
     componentDidMount(){
@@ -36,58 +37,25 @@ class Crud extends React.Component{
         })
     }
 
-    getOne(e){
+
+
+   
+
+  
+
+ 
+
+    delete(e){
         return axios
-        .get(`api/monster/item/`+e,{
+        .post(`api/monster/delete/`+e,{
             headers:{'Content-Type':'application/json'}
         })
         .then(res=>{
-            this.setState({
-                monster:res.data
-                
-            })
-            console.log(this.state.monster)
+            this.getMonster();
         }).catch(res=>{
            
         })
     }
-
-    // create(){
-    //     return axios
-    //     .get(`api/monster/item/`,{
-    //         headers:{'Content-Type':'application/json'}
-    //     })
-    //     .then(res=>{
-          
-    //         console.log("created")
-    //     }).catch(res=>{
-           
-    //     })
-    // }
-
-    // update(e){
-    //     return axios
-    //     .get(`api/monster/update/`+e,{
-    //         headers:{'Content-Type':'application/json'}
-    //     })
-    //     .then(res=>{
-    //         console.log("updated")
-    //     }).catch(res=>{
-           
-    //     })
-    // }
-
-    // delete(e){
-    //     return axios
-    //     .get(`api/monster/delete/`+e,{
-    //         headers:{'Content-Type':'application/json'}
-    //     })
-    //     .then(res=>{
-    //         console.log("deleted")
-    //     }).catch(res=>{
-           
-    //     })
-    // }
 
     
 
@@ -97,9 +65,9 @@ class Crud extends React.Component{
 
         const posts=()=>{
             if(!this.state.monsters){
-                return (     <tr>
-                     <td>ID</td>
-                    <td>Monster Name</td>
+                return (    
+                     <tr>
+             
                     <td>
                     LOADING
                     </td>
@@ -107,8 +75,7 @@ class Crud extends React.Component{
             }
             if(this.state.monsters.length==0){
                 return (<tr>
-                             <td>ID</td>
-                    <td>Monster Name</td>
+               
                     <td>
                     LOADING
                     </td>
@@ -122,9 +89,13 @@ class Crud extends React.Component{
                 <td>{mons.id}</td>
                 <td>{mons.name}</td>
                 <td>
-                <button className="btn btn-primary mr-4">Add</button>
-                <button className="btn btn-secondary mr-4">Edit</button>
-                <button className="btn btn-danger mr-4">Delete</button>
+           
+                <Link to={{ pathname: '/edit', state: { id: mons.id,name:mons.name} }}className="btn btn-secondary mr-4">Edit</Link >
+               <button className="btn btn-danger mr-4" onClick={()=>{
+                    this.delete(mons.id)
+               }}
+        
+               >Delete</button>
                 </td>
                 </tr>
                 )
@@ -136,6 +107,7 @@ class Crud extends React.Component{
         return(
             <div className="container">
                 <div className="row">
+                         <Link className="btn btn-primary m-4" to="/create">Create Monster</Link>
                     <table className="table">
                         <thead>
                         <tr>

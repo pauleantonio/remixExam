@@ -8,6 +8,8 @@ import Login from './Login'
 import Register from './Register'
 import Profile from './Profile'
 import Crud from './Crud'
+import Create from './Create'
+import Edit from './Edit'
 
 
 class App extends Component {
@@ -22,8 +24,8 @@ class App extends Component {
                     <Route exact path="/login" component={Login}/>
                     <Route exact path="/profile" component={Profile}/>
                     <Route exact path="/crud" component={Crud}/>
-                    <Route exact path="/create" component={Crud}/>
-             
+                    <Route exact path="/create" component={Create}/>
+                    <Route exact path="/edit" component={Edit}/>
                 </div>
                 </div>
 

@@ -15,6 +15,37 @@ export const register = newUser=>{
 
 }
 
+
+export const monsregister = monster=>{
+    return axios
+    .post(`api/monster/create`,monster,{
+        headers:{'Content-Type':'application/json'}
+    })
+    .then(res=>{
+        console.log(res.data)
+        return res.data;
+    }).catch(err=>{
+        console.log(err)
+    })
+
+}
+
+
+export const monsedit = monster=>{
+    return axios
+    .put(`api/monster/update/${monster.id}`,monster,{
+        headers:{'Content-Type':'application/json'}
+    })
+    .then(res=>{
+        console.log(res.data)
+        return res.data;
+    }).catch(err=>{
+        console.log(err)
+    })
+
+}
+
+
 export const login = user=>{
     return axios
     .post('/api/auth/login',{

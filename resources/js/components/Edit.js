@@ -1,11 +1,14 @@
 import React, {Component} from 'react'
-import {monsregister} from './UserFunctions'
+import {monsedit} from './UserFunctions'
 
-class Create extends React.Component{
+class Edit extends React.Component{
     constructor(){
         super()
         this.state={ 
+            id:'',
             name:'',
+            monster:'',
+            load:false,
             errors:{}
 
         }
@@ -15,14 +18,23 @@ class Create extends React.Component{
     onChange(e){
         this.setState({[e.target.name]:e.target.value})
     }
+    componentDidMount(){
+        this.setState({
+            name:this.props.location.state.name,
+            id:this.props.location.state.id
+        })
+
+    }
+ 
 
     onSubmit(e){
         e.preventDefault()
         const user={
-            name:this.state.name,
+            id:this.state.id,
+            name:this.state.name
         }
 
-        monsregister(user).then(res=>{
+        monsedit(user).then(res=>{
                 if(res){
                     this.props.history.push('/crud')
                 } 
@@ -35,7 +47,7 @@ class Create extends React.Component{
                 <div className="col-md-6 mt-5 mx-auto">
                 <form noValidate onSubmit={this.onSubmit}>
                 <h1 className="h3 mb-3 font-weight-normal">
-                        Register Monster
+                        Edit Monster
                     </h1>
                     <div className="form-group"> 
                     <label htmlFor="name">Name</label>
@@ -45,9 +57,7 @@ class Create extends React.Component{
                     placeholder="Enter Name here" 
                     value={this.state.name}
                     onChange={this.onChange}></input>
-                    </div>
-
-              
+                    </div>    
                     <button type="submit" className="btn btn-primary" >Submit</button>
 
                 </form>
@@ -65,4 +75,4 @@ class Create extends React.Component{
 
 }
 
-export default Create
+export default Edit

@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {getJoke} from './UserFunctions'
-
+import Email from './Email'
 class Landing extends React.Component{
     constructor(){
         super()
@@ -12,15 +12,16 @@ class Landing extends React.Component{
     }
 
     componentDidMount(){
-        getJoke().then(res=>{
-            this.setState({
-                joke:res.setup,
-                delivery:res.delivery
-            })
+        // getJoke().then(res=>{
+        //     this.setState({
+        //         joke:res.setup,
+        //         delivery:res.delivery
+        //     })
 
 
-        })
+        // })
     }
+
  
     render(){
         return(
@@ -32,8 +33,9 @@ class Landing extends React.Component{
                         </div>
          
                 </div>
+                <Email></Email>
             </div>
-            
+         
         )
 
 

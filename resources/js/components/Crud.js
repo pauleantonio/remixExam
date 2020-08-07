@@ -3,8 +3,8 @@ import React, {Component} from 'react'
 
 class Crud extends React.Component{
 
-    constructor(props){
-        super(props)
+    constructor(){
+        super()
         this.state={
             id:0,
             name:'',
@@ -15,7 +15,7 @@ class Crud extends React.Component{
 
     componentDidMount(){
         this.getMonster();
-        this.getOne(1);
+     
     }
 
     getMonster(){
@@ -28,9 +28,11 @@ class Crud extends React.Component{
                 monsters:res.data
                 
             })
-         
+            console.log(this.state.monsters)
+
+        
         }).catch(res=>{
-           
+           console.log(res);
         })
     }
 
@@ -50,42 +52,42 @@ class Crud extends React.Component{
         })
     }
 
-    create(){
-        return axios
-        .get(`api/monster/item/`,{
-            headers:{'Content-Type':'application/json'}
-        })
-        .then(res=>{
+    // create(){
+    //     return axios
+    //     .get(`api/monster/item/`,{
+    //         headers:{'Content-Type':'application/json'}
+    //     })
+    //     .then(res=>{
           
-            console.log("created")
-        }).catch(res=>{
+    //         console.log("created")
+    //     }).catch(res=>{
            
-        })
-    }
+    //     })
+    // }
 
-    update(e){
-        return axios
-        .get(`api/monster/update/`+e,{
-            headers:{'Content-Type':'application/json'}
-        })
-        .then(res=>{
-            console.log("updated")
-        }).catch(res=>{
+    // update(e){
+    //     return axios
+    //     .get(`api/monster/update/`+e,{
+    //         headers:{'Content-Type':'application/json'}
+    //     })
+    //     .then(res=>{
+    //         console.log("updated")
+    //     }).catch(res=>{
            
-        })
-    }
+    //     })
+    // }
 
-    delete(e){
-        return axios
-        .get(`api/monster/delete/`+e,{
-            headers:{'Content-Type':'application/json'}
-        })
-        .then(res=>{
-            console.log("deleted")
-        }).catch(res=>{
+    // delete(e){
+    //     return axios
+    //     .get(`api/monster/delete/`+e,{
+    //         headers:{'Content-Type':'application/json'}
+    //     })
+    //     .then(res=>{
+    //         console.log("deleted")
+    //     }).catch(res=>{
            
-        })
-    }
+    //     })
+    // }
 
     
 
@@ -95,52 +97,49 @@ class Crud extends React.Component{
 
         const posts=()=>{
             if(!this.state.monsters){
-                return loading
+                return (     <tr>
+                     <td>ID</td>
+                    <td>Monster Name</td>
+                    <td>
+                    LOADING
+                    </td>
+                     </tr>);
             }
             if(this.state.monsters.length==0){
-                return noitem
+                return (<tr>
+                             <td>ID</td>
+                    <td>Monster Name</td>
+                    <td>
+                    LOADING
+                    </td>
+                     </tr>);
             }
             else{
-               return item
-            }
-        }
-        const loading=(
-            <tr>
-            <td>Monster Name</td>
-            <td>
-            LOADING
-            </td>
-             </tr>
-        )
 
-        const noitem=(
-            <tr>
-            <td>Monster Name</td>
-            <td>
-            No Monsters
-            </td>
-             </tr>
-        )
-        const item=(
-            this.state.monsters.map((mons)=>{
-                <tr>
-                <td>{this.state.monsters.length}</td>
+                return  this.state.monsters.map((mons,index)=>
+                <tr key={index}>
+                {console.log(mons)}
+                <td>{mons.id}</td>
+                <td>{mons.name}</td>
                 <td>
                 <button className="btn btn-primary mr-4">Add</button>
                 <button className="btn btn-secondary mr-4">Edit</button>
                 <button className="btn btn-danger mr-4">Delete</button>
                 </td>
                 </tr>
-            })
-    
-
-        )
+                )
+            }
+        
+        }
+     
+      
         return(
             <div className="container">
                 <div className="row">
                     <table className="table">
                         <thead>
                         <tr>
+                        <td>ID</td>
                         <td>Monster Name</td>
                         <td>Commands</td>
                         </tr>

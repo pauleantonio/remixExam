@@ -31,9 +31,9 @@ class UserController extends Controller
             'email'=>$request->json()->get('email'),
             'password'=>Hash::make($request->json()->get('password'))
         ]);
-        $token =JWTAuth::fromUser($user);
+    
             
-        return response()->json(compact('user','token'),201);
+        return response()->json(compact('user'),201);
     }
  
     public function login(Request $request){
@@ -49,9 +49,7 @@ class UserController extends Controller
 
         return response()->json(compact('token'));
 
-         //$creds=$request->only(['email','password']);
-         //$token=auth()->attempt($creds);
-        // return response()->json(['token'=>$token]);
+       
     }
 
     public function getAuthUser(){
@@ -61,15 +59,11 @@ class UserController extends Controller
             }
         }
         catch(Tymon\JWTAuth\Exceptions\TokenExpiredException $e){
-            return response()->json(['token_expired'],$e->getStatusCode());
+            return response()->json(['token_error'],$e->getStatusCode());
         }
-        catch(Tymon\JWTAuth\Exceptions\TokenExpiredException $e){
-            return response()->json(['token_invalid'],$e->getStatusCode());
-        }
-        catch(Tymon\JWTAuth\Exceptions\TokenExpiredException $e){
-            return response()->json(['token_absent'],$e->getStatusCode());
-        }
-        error_log($user);
+
+        
+        
         return response()->json(compact('user'));
     }
 

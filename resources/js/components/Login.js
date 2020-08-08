@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {login} from './UserFunctions'
+import ReCAPTCHA from "react-google-recaptcha";
 
 class Login extends Component{
     constructor(){
@@ -8,14 +9,19 @@ class Login extends Component{
             email:'',
             role:'',
             password:'',
+            verified:false,
             errors:{}
+
         }
         this.onChange=this.onChange.bind(this);
         this.onSubmit=this.onSubmit.bind(this);
+        this.onVerify=this.onVerify.bind(this);
     }
     onChange(e){
         this.setState({[e.target.name]:e.target.value})
     }
+
+    
 
     onSubmit(e){
         e.preventDefault()
@@ -24,16 +30,28 @@ class Login extends Component{
             email:this.state.email,
             password:this.state.password
         }
-
-          login(user).then( res=>{
+        if(this.state.verified){
+            login(user).then( res=>{
         
-            if(res){
-                this.props.history.push("/profile")
-            }
-        
+                if(res){
+                    this.props.history.push("/profile")
+                }
+            
+            })
+        }else{
+            alert('Verify first')
+        }
+       
+     
+    }
+    onVerify(respone) {
+        console.log("Captcha successful");
+        this.setState({
+            verified:true
         })
     }
     render(){
+      
         return(
             <div className='container'>
                 <div className="row">
@@ -61,6 +79,10 @@ class Login extends Component{
                     value={this.state.password}
                     onChange={this.onChange}></input>
                     </div>
+                    <ReCAPTCHA
+                        sitekey="6Lf_AbwZAAAAAAGW5ku_S7FzL_nKYcRSuSqgyeNP"
+                        onChange={this.onVerify}
+                    />,
                     <button type="submit" className="btn btn-primary" >Login</button>
 
                 </form>

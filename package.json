@@ -28,6 +28,7 @@
         "emailjs-com": "^2.6.3",
         "jwt-decode": "^2.2.0",
         "react": "^16.13.1",
+        "react-google-recaptcha": "^2.1.0",
         "react-router-dom": "^5.2.0",
         "ui": "^0.2.4"
     }

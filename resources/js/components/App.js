@@ -20,12 +20,12 @@ class App extends Component {
                 <Navbar/>
                 <Route exact path="/" component = {Landing}/>
                 <div className="container">
-                    <Route exact path="/register" component={Register}/>
-                    <Route exact path="/login" component={Login}/>
-                    <Route exact path="/profile" component={Profile}/>
-                    <Route exact path="/crud" component={Crud}/>
-                    <Route exact path="/create" component={Create}/>
-                    <Route exact path="/edit" component={Edit}/>
+                    <Route  path="/register" component={Register}/>
+                    <Route  path="/login" component={Login}/>
+                    <Route  path="/profile" component={Profile}/>
+                    <Route  path="/crud" component={Crud}/>
+                    <Route  path="/create" component={Create}/>
+                    <Route  path="/edit" component={Edit}/>
                 </div>
                 </div>
 

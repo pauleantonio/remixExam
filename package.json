@@ -26,6 +26,8 @@
     },
     "dependencies": {
         "emailjs-com": "^2.6.3",
+        "google-map-react": "^2.0.8",
+        "google-maps-react": "^2.0.6",
         "jwt-decode": "^2.2.0",
         "react": "^16.13.1",
         "react-google-recaptcha": "^2.1.0",

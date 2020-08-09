@@ -78167,7 +78167,9 @@ var Crud = /*#__PURE__*/function (_React$Component) {
           monsters: res.data
         });
 
-        console.log(_this2.state.monsters);
+        {
+          console.log(_this2.state.monsters);
+        }
       })["catch"](function (res) {
         console.log(res);
       });
@@ -78196,12 +78198,12 @@ var Crud = /*#__PURE__*/function (_React$Component) {
         }
 
         if (_this4.state.monsters.length == 0) {
-          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "LOADING"));
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "No Monsters"));
         } else {
           return _this4.state.monsters.map(function (mons, index) {
             return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
               key: index
-            }, console.log(mons), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, mons.id), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, mons.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+            }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, mons.id), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, mons.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
               to: {
                 pathname: '/edit',
                 state: {
@@ -78826,27 +78828,86 @@ var MapContainer = /*#__PURE__*/function (_Component) {
   var _super = _createSuper(MapContainer);
 
   function MapContainer() {
+    var _this;
+
     _classCallCheck(this, MapContainer);
 
-    return _super.apply(this, arguments);
+    _this = _super.call(this);
+    _this.state = {
+      id: 0,
+      name: '',
+      points: [],
+      point: ''
+    };
+    return _this;
   }
 
   _createClass(MapContainer, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.getPoints();
+    }
+  }, {
+    key: "getPoints",
+    value: function getPoints() {
+      var _this2 = this;
+
+      return axios.get('/api/point', {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }).then(function (res) {
+        _this2.setState({
+          points: res.data
+        });
+
+        console.log(res.data);
+      })["catch"](function (res) {
+        console.log(res);
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
+      var _this3 = this;
+
+      var posts = function posts() {
+        if (!_this3.state.points) {
+          return '';
+        }
+
+        if (_this3.state.points.length == 0) {
+          return '';
+        } else {
+          return _this3.state.points.map(function (point, index) {
+            return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(google_maps_react__WEBPACK_IMPORTED_MODULE_1__["Marker"], {
+              key: index,
+              onClick: _this3.onMarkerClick,
+              title: 'point.name',
+              name: 'SOMA',
+              position: {
+                lat: point.lat,
+                lng: point.lng
+              }
+            });
+          });
+        }
+      };
+
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         style: {
           position: 'relative',
           width: '100%',
           height: '100vh'
         }
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(google_maps_react__WEBPACK_IMPORTED_MODULE_1__["Map"], {
+      }, posts(), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(google_maps_react__WEBPACK_IMPORTED_MODULE_1__["Map"], {
         google: this.props.google,
+        initialCenter: {
+          lat: 14.319431,
+          lng: 121.059494
+        },
         zoom: 14
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(google_maps_react__WEBPACK_IMPORTED_MODULE_1__["Marker"], {
-        onClick: this.onMarkerClick,
-        name: 'Current location'
-      })));
+      }, posts()));
     }
   }]);
 

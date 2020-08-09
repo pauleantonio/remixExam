@@ -16,7 +16,6 @@ class Crud extends React.Component{
 
     componentDidMount(){
         this.getMonster();
-     
     }
 
     getMonster(){
@@ -29,9 +28,7 @@ class Crud extends React.Component{
                 monsters:res.data
                 
             })
-            console.log(this.state.monsters)
-
-        
+            {console.log(this.state.monsters)}
         }).catch(res=>{
            console.log(res);
         })
@@ -77,7 +74,7 @@ class Crud extends React.Component{
                 return (<tr>
                
                     <td>
-                    LOADING
+                    No Monsters
                     </td>
                      </tr>);
             }
@@ -85,7 +82,7 @@ class Crud extends React.Component{
 
                 return  this.state.monsters.map((mons,index)=>
                 <tr key={index}>
-                {console.log(mons)}
+            
                 <td>{mons.id}</td>
                 <td>{mons.name}</td>
                 <td>

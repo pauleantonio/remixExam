@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Monster;
-class MonsterSeeder extends Seeder
+
+class PointsSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,8 +11,6 @@ class MonsterSeeder extends Seeder
      */
     public function run()
     {
-        Monster::create([
-            'name'
-        ]);
+        //
     }
 }

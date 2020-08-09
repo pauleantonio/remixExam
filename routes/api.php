@@ -42,6 +42,24 @@ Route::group([
     Route::put('update/{monster}', 'MonsterController@update');
 
 });
+
+Route::group([
+
+    'middleware' => 'api',
+    'prefix' => 'point'
+
+], function ($router) {
+
+    Route::get('/', 'PointsController@index');
+    Route::get('/item/{point}', 'PointsController@show');
+    Route::get('/item/{point}/edit', 'PointsController@edit');
+    Route::post('create', 'PointsController@store');
+    Route::post('delete/{point}', 'PointsController@destroy');
+    Route::put('update/{point}', 'PointsController@update');
+
+});
+
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
